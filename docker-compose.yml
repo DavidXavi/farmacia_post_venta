@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME:-posfarmacia}
+      POSTGRES_USER: ${DB_USER:-posfarmacia}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?debes definir DB_PASSWORD en .env}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-posfarmacia}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ConnectionStrings__Default: Host=db;Database=${DB_NAME:-posfarmacia};Username=${DB_USER:-posfarmacia};Password=${DB_PASSWORD:?debes definir DB_PASSWORD en .env}
+      Jwt__Key: ${JWT_KEY:?debes definir JWT_KEY en .env}
+    ports:
+      - "8088:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  db-data:

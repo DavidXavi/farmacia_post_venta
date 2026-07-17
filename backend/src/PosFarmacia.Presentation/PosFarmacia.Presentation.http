@@ -1,0 +1,6 @@
+@PosFarmacia.Presentation_HostAddress = http://localhost:5231
+
+GET {{PosFarmacia.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

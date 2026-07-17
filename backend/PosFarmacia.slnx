@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PosFarmacia.Application/PosFarmacia.Application.csproj" />
+    <Project Path="src/PosFarmacia.Domain/PosFarmacia.Domain.csproj" />
+    <Project Path="src/PosFarmacia.Infrastructure/PosFarmacia.Infrastructure.csproj" />
+    <Project Path="src/PosFarmacia.Presentation/PosFarmacia.Presentation.csproj" />
+  </Folder>
+</Solution>

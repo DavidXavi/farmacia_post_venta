@@ -1,0 +1,6 @@
+.env
+.vs/
+.vscode/
+.idea/
+*.DotSettings.user
+.gstack/
