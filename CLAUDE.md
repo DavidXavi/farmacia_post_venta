@@ -66,6 +66,10 @@ Regla de dependencias (innegociable):
 - Cualquier servicio nuevo (mocks de seguros, central, etc.) se agrega como servicio adicional en `docker-compose.yml`, no como proceso paralelo fuera de Docker.
 - Secretos y cadenas de conexión van por variables de entorno (`.env`, ignorado por git) usando `.env.example` como plantilla. Nunca hardcodear credenciales en `docker-compose.yml`, `appsettings.json` ni en el código.
 
+## Git
+
+- Nunca agregar `Co-Authored-By: Claude` (ni ninguna variante) en los mensajes de commit de este repositorio. Los commits van solo con la autoría del usuario.
+
 ## Límites de código
 
 - Ningún archivo debe superar **1000 líneas**. Si una clase/archivo se acerca al límite, dividir por responsabilidad (SRP) en vez de seguir agregando.
