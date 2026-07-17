@@ -5,6 +5,10 @@ de crédito, lotes/FEFO, anulaciones y notas de crédito) construido con **Arqui
 Onion**. Especificación funcional completa en
 [`docs/Sistema_POS_Farmacia_Javier_Geronimo_Jara.docx`](docs/Sistema_POS_Farmacia_Javier_Geronimo_Jara.docx).
 
+Guías paso a paso de cómo se construyó cada parte (comandos y cómo agregar código
+nuevo): [`docs/GUIA_BACKEND.md`](docs/GUIA_BACKEND.md) y
+[`docs/GUIA_FRONTEND.md`](docs/GUIA_FRONTEND.md).
+
 ## Stack
 
 | Capa | Tecnología |
