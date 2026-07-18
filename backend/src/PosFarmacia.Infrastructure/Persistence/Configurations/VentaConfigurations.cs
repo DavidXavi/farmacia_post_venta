@@ -83,3 +83,26 @@ public sealed class ComprobanteConfiguration : IEntityTypeConfiguration<Comproba
         });
     }
 }
+
+public sealed class DevolucionConfiguration : IEntityTypeConfiguration<Devolucion>
+{
+    public void Configure(EntityTypeBuilder<Devolucion> builder)
+    {
+        builder.ToTable("devoluciones");
+        builder.HasKey(d => d.Id);
+        builder.Property(d => d.Motivo).IsRequired().HasMaxLength(500);
+
+        builder.HasMany(d => d.Detalles).WithOne().HasForeignKey(d => d.DevolucionId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public sealed class DetalleDevolucionConfiguration : IEntityTypeConfiguration<DetalleDevolucion>
+{
+    public void Configure(EntityTypeBuilder<DetalleDevolucion> builder)
+    {
+        builder.ToTable("detalles_devolucion");
+        builder.HasKey(d => d.Id);
+        builder.Property(d => d.Cantidad).IsRequired().HasConversion(c => c.Valor, v => new Cantidad(v));
+        builder.Property(d => d.MontoDevuelto).IsRequired().HasConversion(m => m.Monto, v => new Dinero(v)).HasColumnType("numeric(12,2)");
+    }
+}

@@ -24,6 +24,8 @@ public static class DependencyInjection
         services.AddSingleton<AsignadorLotesFEFO>();
         services.AddSingleton<ServicioAnulacionVenta>();
         services.AddSingleton<CalculadorIncentivos>();
+        services.AddSingleton<ValidadorDevolucion>();
+        services.AddSingleton<AsignadorReversionesDevolucion>();
 
         return services;
     }

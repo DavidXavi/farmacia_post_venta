@@ -78,9 +78,12 @@ public sealed class LocalesController(RegistrarLocalUseCase registrar, Consultar
 [ApiController]
 [Route("api/reglas-incentivo")]
 [Authorize(Roles = "Administrador")]
-public sealed class ReglasIncentivoController(RegistrarReglaIncentivoUseCase registrar) : ControllerBase
+public sealed class ReglasIncentivoController(RegistrarReglaIncentivoUseCase registrar, ConsultarReglasIncentivoUseCase consultar) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<ReglaIncentivoResponse>> Registrar(RegistrarReglaIncentivoRequest request, CancellationToken ct) =>
         Ok(await registrar.EjecutarAsync(request, ct));
+
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<ReglaIncentivoResponse>>> Listar(CancellationToken ct) => Ok(await consultar.EjecutarAsync(ct));
 }

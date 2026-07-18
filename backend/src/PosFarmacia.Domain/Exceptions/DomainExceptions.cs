@@ -30,3 +30,5 @@ public sealed class ConvenioNoDisponibleException(string mensaje) : DomainExcept
 public sealed class LineaCreditoInvalidaException(string mensaje) : DomainException(mensaje);
 
 public sealed class AnulacionNoPermitidaException(string mensaje) : DomainException(mensaje);
+
+public sealed class DevolucionInvalidaException(string mensaje) : DomainException(mensaje);

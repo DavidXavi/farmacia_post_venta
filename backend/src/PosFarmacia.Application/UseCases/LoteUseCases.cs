@@ -7,7 +7,7 @@ using PosFarmacia.Domain.ValueObjects;
 
 namespace PosFarmacia.Application.UseCases;
 
-public sealed class RegistrarLoteUseCase(ILoteRepository lotes, IUnitOfWork unitOfWork)
+public sealed class RegistrarLoteUseCase(ILoteRepository lotes, SincronizarInventarioService sincronizarInventario, IUnitOfWork unitOfWork)
 {
     public async Task<LoteResponse> EjecutarAsync(RegistrarLoteRequest request, CancellationToken ct = default)
     {
@@ -20,6 +20,10 @@ public sealed class RegistrarLoteUseCase(ILoteRepository lotes, IUnitOfWork unit
             request.Costo is null ? null : new Dinero(request.Costo.Value));
 
         await lotes.AgregarAsync(lote, ct);
+        // El lote aun no existe en BD (Added): se persiste primero para que el recalculo del inventario lo cuente.
+        await unitOfWork.GuardarCambiosAsync(ct);
+
+        await sincronizarInventario.SincronizarAsync(lote.ProductoId, lote.LocalId, ct);
         await unitOfWork.GuardarCambiosAsync(ct);
         return lote.ToResponse();
     }

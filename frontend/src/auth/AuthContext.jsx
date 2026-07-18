@@ -5,7 +5,9 @@ const AuthContext = createContext(null)
 
 function loadStoredSession() {
   const raw = localStorage.getItem('posfarmacia.session')
-  return raw ? JSON.parse(raw) : null
+  const session = raw ? JSON.parse(raw) : null
+  setAuthToken(session?.token ?? null)
+  return session
 }
 
 export function AuthProvider({ children }) {

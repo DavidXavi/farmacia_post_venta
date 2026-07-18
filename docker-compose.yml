@@ -8,7 +8,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5450:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-posfarmacia}"]
       interval: 5s

@@ -59,6 +59,18 @@ public sealed class LoteRepository(PosFarmaciaDbContext contexto) : RepositorioB
             .OrderBy(l => l.FechaVencimiento.Valor)
             .ToList();
     }
+
+    public async Task<IReadOnlyList<Lote>> ObtenerPorProductoYLocalAsync(Guid productoId, Guid localId, CancellationToken ct = default) =>
+        await Contexto.Lotes.Where(l => l.ProductoId == productoId && l.LocalId == localId).ToListAsync(ct);
 }
 
 public sealed class MovimientoStockRepository(PosFarmaciaDbContext contexto) : RepositorioBase<MovimientoStock>(contexto), IMovimientoStockRepository;
+
+public sealed class InventarioRepository(PosFarmaciaDbContext contexto) : RepositorioBase<Inventario>(contexto), IInventarioRepository
+{
+    public async Task<Inventario?> ObtenerPorProductoYLocalAsync(Guid productoId, Guid localId, CancellationToken ct = default) =>
+        await Contexto.Inventarios.FirstOrDefaultAsync(i => i.ProductoId == productoId && i.LocalId == localId, ct);
+
+    public async Task<IReadOnlyList<Inventario>> ObtenerPorLocalAsync(Guid localId, CancellationToken ct = default) =>
+        await Contexto.Inventarios.Where(i => i.LocalId == localId).ToListAsync(ct);
+}

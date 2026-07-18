@@ -31,7 +31,7 @@ docker compose up -d
 | **Frontend (abrir en el navegador)** | http://localhost:5173 |
 | Backend API | http://localhost:8088 |
 | OpenAPI (JSON) | http://localhost:8088/openapi/v1.json |
-| PostgreSQL | localhost:5432 |
+| PostgreSQL | localhost:5450 |
 
 Al iniciar, el backend aplica las migraciones de EF Core automáticamente y siembra datos
 de prueba (roles, usuarios, un local, una caja, un producto y un lote) si la base está vacía.

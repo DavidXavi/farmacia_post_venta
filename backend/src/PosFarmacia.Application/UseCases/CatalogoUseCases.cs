@@ -120,3 +120,9 @@ public sealed class RegistrarReglaIncentivoUseCase(IReglaIncentivoRepository reg
         return regla.ToResponse();
     }
 }
+
+public sealed class ConsultarReglasIncentivoUseCase(IReglaIncentivoRepository reglas)
+{
+    public async Task<IReadOnlyList<ReglaIncentivoResponse>> EjecutarAsync(CancellationToken ct = default) =>
+        (await reglas.ObtenerTodosAsync(ct)).Select(r => r.ToResponse()).ToList();
+}

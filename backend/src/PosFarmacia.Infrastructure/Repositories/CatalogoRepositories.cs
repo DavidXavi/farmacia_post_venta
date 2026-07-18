@@ -19,6 +19,9 @@ public sealed class UsuarioRepository(PosFarmaciaDbContext contexto) : Repositor
     public override async Task<Usuario?> ObtenerPorIdAsync(Guid id, CancellationToken ct = default) =>
         await Contexto.Usuarios.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Id == id, ct);
 
+    public override async Task<IReadOnlyList<Usuario>> ObtenerTodosAsync(CancellationToken ct = default) =>
+        await Contexto.Usuarios.Include(u => u.Roles).ToListAsync(ct);
+
     public async Task<Usuario?> ObtenerPorNombreUsuarioAsync(string nombreUsuario, CancellationToken ct = default) =>
         await Contexto.Usuarios.Include(u => u.Roles).FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario, ct);
 }

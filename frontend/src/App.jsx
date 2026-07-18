@@ -10,6 +10,13 @@ import { ClientesPage } from './pages/ClientesPage'
 import { RecetasPage } from './pages/RecetasPage'
 import { ReportesPage } from './pages/ReportesPage'
 import { AuditoriaPage } from './pages/AuditoriaPage'
+import { UsuariosPage } from './pages/UsuariosPage'
+import { PromocionesPage } from './pages/PromocionesPage'
+import { ConveniosPage } from './pages/ConveniosPage'
+import { CreditosPage } from './pages/CreditosPage'
+import { CatalogosPage } from './pages/CatalogosPage'
+import { InventarioPage } from './pages/InventarioPage'
+import { DevolucionesPage } from './pages/DevolucionesPage'
 
 function App() {
   return (
@@ -27,8 +34,15 @@ function App() {
         <Route path="caja" element={<CajaPage />} />
         <Route path="productos" element={<ProductosPage />} />
         <Route path="lotes" element={<LotesPage />} />
+        <Route path="inventario" element={<InventarioPage />} />
+        <Route path="devoluciones" element={<DevolucionesPage />} />
         <Route path="clientes" element={<ClientesPage />} />
         <Route path="recetas" element={<RecetasPage />} />
+        <Route path="promociones" element={<PromocionesPage />} />
+        <Route path="convenios" element={<ConveniosPage />} />
+        <Route path="creditos" element={<CreditosPage />} />
+        <Route path="catalogos" element={<CatalogosPage />} />
+        <Route path="usuarios" element={<UsuariosPage />} />
         <Route path="reportes" element={<ReportesPage />} />
         <Route path="auditoria" element={<AuditoriaPage />} />
       </Route>

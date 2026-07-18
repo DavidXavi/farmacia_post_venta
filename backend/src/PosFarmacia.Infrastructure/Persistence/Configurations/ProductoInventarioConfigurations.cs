@@ -63,3 +63,15 @@ public sealed class MovimientoStockConfiguration : IEntityTypeConfiguration<Movi
         builder.Property(m => m.Referencia).HasMaxLength(100);
     }
 }
+
+public sealed class InventarioConfiguration : IEntityTypeConfiguration<Inventario>
+{
+    public void Configure(EntityTypeBuilder<Inventario> builder)
+    {
+        builder.ToTable("inventarios");
+        builder.HasKey(i => i.Id);
+        builder.Property(i => i.CantidadActual).IsRequired().HasConversion(c => c.Valor, v => new Cantidad(v));
+
+        builder.HasIndex(i => new { i.ProductoId, i.LocalId }).IsUnique();
+    }
+}

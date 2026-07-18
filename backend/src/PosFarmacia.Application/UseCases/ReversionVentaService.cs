@@ -13,7 +13,8 @@ public sealed class ReversionVentaService(
     ILineaCreditoRepository lineasCredito,
     IMovimientoCreditoRepository movimientosCredito,
     IFormaPagoRepository formasPago,
-    ServicioAnulacionVenta servicioAnulacion)
+    ServicioAnulacionVenta servicioAnulacion,
+    SincronizarInventarioService sincronizarInventario)
 {
     public async Task RevertirStockAsync(Venta venta, Guid usuarioId, CancellationToken ct)
     {
@@ -27,6 +28,7 @@ public sealed class ReversionVentaService(
 
             var movimiento = new MovimientoStock(loteId, TipoMovimientoStock.ReversionAnulacion, cantidad, usuarioId, venta.Id.ToString());
             await movimientosStock.AgregarAsync(movimiento, ct);
+            await sincronizarInventario.SincronizarAsync(lote.ProductoId, lote.LocalId, ct);
         }
     }
 

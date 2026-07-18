@@ -33,3 +33,25 @@ public sealed class RegistrarUsuarioUseCase(IUsuarioRepository usuarios, IRolRep
         return new UsuarioResponse(usuario.Id, usuario.NombreUsuario, usuario.LocalId, usuario.Estado.ToString(), nombresRoles);
     }
 }
+
+public sealed class ConsultarUsuariosUseCase(IUsuarioRepository usuarios, IRolRepository roles)
+{
+    public async Task<IReadOnlyList<UsuarioResponse>> EjecutarAsync(CancellationToken ct = default)
+    {
+        var todosLosRoles = (await roles.ObtenerTodosAsync(ct)).ToDictionary(r => r.Id, r => r.Nombre.ToString());
+        var todosLosUsuarios = await usuarios.ObtenerTodosAsync(ct);
+
+        return todosLosUsuarios.Select(u => new UsuarioResponse(
+            u.Id,
+            u.NombreUsuario,
+            u.LocalId,
+            u.Estado.ToString(),
+            u.Roles.Select(r => todosLosRoles.GetValueOrDefault(r.RolId, r.RolId.ToString())).ToList())).ToList();
+    }
+}
+
+public sealed class ConsultarRolesUseCase(IRolRepository roles)
+{
+    public async Task<IReadOnlyList<RolResponse>> EjecutarAsync(CancellationToken ct = default) =>
+        (await roles.ObtenerTodosAsync(ct)).Select(r => new RolResponse(r.Id, r.Nombre.ToString(), r.Descripcion)).ToList();
+}

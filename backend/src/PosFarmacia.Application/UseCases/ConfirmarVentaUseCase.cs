@@ -19,6 +19,7 @@ public sealed class ConfirmarVentaUseCase(
     IRecetaRepository recetas,
     AsignadorLotesFEFO asignadorFefo,
     CalculadorIncentivos calculadorIncentivos,
+    SincronizarInventarioService sincronizarInventario,
     IUnitOfWork unitOfWork,
     TimeProvider reloj)
 {
@@ -52,6 +53,7 @@ public sealed class ConfirmarVentaUseCase(
 
                 var movimiento = new MovimientoStock(loteId, TipoMovimientoStock.Salida, cantidad, venta.UsuarioId, venta.Id.ToString());
                 await movimientosStock.AgregarAsync(movimiento, ct);
+                await sincronizarInventario.SincronizarAsync(lote.ProductoId, lote.LocalId, ct);
             }
 
             var producto = await productos.ObtenerPorIdAsync(detalle.ProductoId, ct);

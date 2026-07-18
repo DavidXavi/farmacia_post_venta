@@ -30,6 +30,8 @@ public sealed class PosFarmaciaDbContext(DbContextOptions<PosFarmaciaDbContext> 
 
     public DbSet<MovimientoStock> MovimientosStock => Set<MovimientoStock>();
 
+    public DbSet<Inventario> Inventarios => Set<Inventario>();
+
     public DbSet<Venta> Ventas => Set<Venta>();
 
     public DbSet<Promocion> Promociones => Set<Promocion>();
@@ -55,6 +57,8 @@ public sealed class PosFarmaciaDbContext(DbContextOptions<PosFarmaciaDbContext> 
     public DbSet<IncentivoVenta> IncentivosVenta => Set<IncentivoVenta>();
 
     public DbSet<Auditoria> Auditorias => Set<Auditoria>();
+
+    public DbSet<Devolucion> Devoluciones => Set<Devolucion>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

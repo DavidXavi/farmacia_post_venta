@@ -10,12 +10,17 @@ namespace PosFarmacia.Presentation.Controllers;
 [Authorize(Roles = "Administrador,OperadorCentral")]
 public sealed class ConveniosController(
     RegistrarConvenioUseCase registrarConvenio,
+    ConsultarConveniosUseCase consultarConvenios,
     ConfigurarCoberturaUseCase configurarCobertura,
     RegistrarAfiliacionUseCase registrarAfiliacion) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<ConvenioResponse>> Registrar(RegistrarConvenioRequest request, CancellationToken ct) =>
         Ok(await registrarConvenio.EjecutarAsync(request, ct));
+
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<ConvenioResponse>>> Listar(CancellationToken ct) =>
+        Ok(await consultarConvenios.EjecutarAsync(ct));
 
     [HttpPost("{id:guid}/coberturas")]
     public async Task<IActionResult> ConfigurarCobertura(Guid id, ConfigurarCoberturaRequest request, CancellationToken ct)

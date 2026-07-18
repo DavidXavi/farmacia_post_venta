@@ -49,3 +49,9 @@ public sealed class ConsultarConvenioDeClienteUseCase(IAfiliacionClienteReposito
         return resultado.Select(a => a.ToResponse()).ToList();
     }
 }
+
+public sealed class ConsultarConveniosUseCase(IConvenioSeguroRepository convenios)
+{
+    public async Task<IReadOnlyList<ConvenioResponse>> EjecutarAsync(CancellationToken ct = default) =>
+        (await convenios.ObtenerTodosAsync(ct)).Select(c => c.ToResponse()).ToList();
+}

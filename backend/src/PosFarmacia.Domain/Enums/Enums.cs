@@ -73,7 +73,8 @@ public enum TipoMovimientoStock
     Salida,
     AjustePositivo,
     AjusteNegativo,
-    ReversionAnulacion
+    ReversionAnulacion,
+    ReversionDevolucion
 }
 
 public enum TipoComprobante

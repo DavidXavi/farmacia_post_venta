@@ -28,7 +28,7 @@ public sealed class VentaRepository(PosFarmaciaDbContext contexto) : Repositorio
 
         if (fecha is not null)
         {
-            var inicio = fecha.Value.ToDateTime(TimeOnly.MinValue);
+            var inicio = DateTime.SpecifyKind(fecha.Value.ToDateTime(TimeOnly.MinValue), DateTimeKind.Utc);
             var fin = inicio.AddDays(1);
             query = query.Where(v => v.Fecha >= inicio && v.Fecha < fin);
         }
@@ -61,4 +61,10 @@ public sealed class VentaRepository(PosFarmaciaDbContext contexto) : Repositorio
 
     public async Task<IReadOnlyList<Venta>> ObtenerPorSesionCajaAsync(Guid sesionCajaId, CancellationToken ct = default) =>
         await ConAgregado().Where(v => v.SesionCajaId == sesionCajaId).ToListAsync(ct);
+}
+
+public sealed class DevolucionRepository(PosFarmaciaDbContext contexto) : RepositorioBase<Devolucion>(contexto), IDevolucionRepository
+{
+    public async Task<IReadOnlyList<Devolucion>> ObtenerPorVentaAsync(Guid ventaId, CancellationToken ct = default) =>
+        await Contexto.Devoluciones.Include(d => d.Detalles).Where(d => d.VentaId == ventaId).ToListAsync(ct);
 }
