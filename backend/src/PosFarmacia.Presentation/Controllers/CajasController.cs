@@ -39,3 +39,5 @@ public sealed class CajasController(
         return sesion is null ? NotFound() : Ok(sesion);
     }
 }
+
+

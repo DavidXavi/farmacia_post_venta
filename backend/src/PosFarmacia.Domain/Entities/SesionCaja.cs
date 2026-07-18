@@ -60,3 +60,5 @@ public sealed class SesionCaja : Entidad
         }
     }
 }
+
+

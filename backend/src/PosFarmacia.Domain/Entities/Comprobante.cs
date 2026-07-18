@@ -23,3 +23,5 @@ public sealed class Comprobante : Entidad
 
     public DateTime FechaEmision { get; private set; }
 }
+
+

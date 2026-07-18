@@ -33,3 +33,5 @@ public sealed class ConveniosController(
     public async Task<ActionResult<AfiliacionResponse>> RegistrarAfiliacion(RegistrarAfiliacionRequest request, CancellationToken ct) =>
         Ok(await registrarAfiliacion.EjecutarAsync(request, ct));
 }
+
+

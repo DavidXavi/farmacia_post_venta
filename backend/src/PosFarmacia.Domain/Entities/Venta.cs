@@ -150,3 +150,5 @@ public sealed class Venta : Entidad
         }
     }
 }
+
+

@@ -71,3 +71,5 @@ public sealed class DetalleVenta : Entidad
         Subtotal = baseImponible + ImpuestoMonto;
     }
 }
+
+

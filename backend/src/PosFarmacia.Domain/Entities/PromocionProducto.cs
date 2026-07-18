@@ -14,3 +14,5 @@ public sealed class PromocionProducto
 
     public Guid ProductoId { get; private set; }
 }
+
+

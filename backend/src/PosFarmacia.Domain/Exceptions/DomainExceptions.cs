@@ -32,3 +32,4 @@ public sealed class LineaCreditoInvalidaException(string mensaje) : DomainExcept
 public sealed class AnulacionNoPermitidaException(string mensaje) : DomainException(mensaje);
 
 public sealed class DevolucionInvalidaException(string mensaje) : DomainException(mensaje);
+

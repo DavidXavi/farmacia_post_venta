@@ -14,3 +14,5 @@ public sealed class AuthController(IniciarSesionUseCase iniciarSesion) : Control
     public async Task<ActionResult<LoginResponse>> Login(LoginRequest request, CancellationToken ct) =>
         Ok(await iniciarSesion.EjecutarAsync(request, ct));
 }
+
+

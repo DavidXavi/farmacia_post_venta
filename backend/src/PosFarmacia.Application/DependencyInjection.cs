@@ -12,9 +12,7 @@ public static class DependencyInjection
             .Where(t => t.IsClass && !t.IsAbstract && t.Namespace == namespacioUseCases);
 
         foreach (var tipo in tiposUseCases)
-        {
             services.AddScoped(tipo);
-        }
 
         services.AddSingleton<EvaluadorPromociones>();
         services.AddSingleton<CalculadorTotalVenta>();

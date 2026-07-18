@@ -33,3 +33,5 @@ public sealed class Auditoria : Entidad
 
     public string? DatosNuevos { get; private set; }
 }
+
+

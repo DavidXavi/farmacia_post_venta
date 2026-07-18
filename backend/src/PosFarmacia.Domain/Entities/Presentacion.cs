@@ -14,3 +14,5 @@ public sealed class Presentacion : Entidad
 
     public string UnidadMedida { get; private set; } = string.Empty;
 }
+
+

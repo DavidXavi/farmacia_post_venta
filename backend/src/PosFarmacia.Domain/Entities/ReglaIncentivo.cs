@@ -34,3 +34,5 @@ public sealed class ReglaIncentivo : Entidad
 
     public void Desactivar() => Activa = false;
 }
+
+

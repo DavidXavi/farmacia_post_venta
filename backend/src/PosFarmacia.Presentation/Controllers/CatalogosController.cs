@@ -87,3 +87,5 @@ public sealed class ReglasIncentivoController(RegistrarReglaIncentivoUseCase reg
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<ReglaIncentivoResponse>>> Listar(CancellationToken ct) => Ok(await consultar.EjecutarAsync(ct));
 }
+
+
