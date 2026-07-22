@@ -21,3 +21,5 @@ public sealed class CoberturaConvenio : Entidad
 
     internal void ActualizarPorcentaje(Porcentaje porcentaje) => PorcentajeCubierto = porcentaje;
 }
+
+

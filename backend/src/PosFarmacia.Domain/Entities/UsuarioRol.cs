@@ -14,3 +14,5 @@ public sealed class UsuarioRol
 
     public Guid RolId { get; private set; }
 }
+
+

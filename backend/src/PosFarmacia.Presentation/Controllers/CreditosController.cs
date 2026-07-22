@@ -14,3 +14,5 @@ public sealed class CreditosController(RegistrarLineaCreditoUseCase registrarLin
     public async Task<ActionResult<LineaCreditoResponse>> Registrar(RegistrarLineaCreditoRequest request, CancellationToken ct) =>
         Ok(await registrarLineaCredito.EjecutarAsync(request, ct));
 }
+
+

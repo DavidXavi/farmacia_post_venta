@@ -84,3 +84,5 @@ public sealed class Producto : Entidad
 
     public bool EstaVendible => Estado == EstadoProducto.Activo;
 }
+
+

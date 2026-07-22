@@ -17,3 +17,5 @@ public sealed class Caja : Entidad
 
     public bool Activa { get; private set; }
 }
+
+

@@ -86,3 +86,5 @@ public sealed class Receta : Entidad
 
     public bool PuedeUsarseNuevamente() => Tipo != TipoReceta.EspecialRetenida || Estado != EstadoReceta.Utilizada;
 }
+
+

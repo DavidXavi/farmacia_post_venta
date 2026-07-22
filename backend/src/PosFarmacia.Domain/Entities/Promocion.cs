@@ -89,3 +89,5 @@ public sealed class Promocion : Entidad
 
     public void Desactivar() => Activa = false;
 }
+
+

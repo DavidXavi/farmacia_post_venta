@@ -36,3 +36,5 @@ public sealed class ClientesController(
         return linea is null ? NotFound() : Ok(linea);
     }
 }
+
+

@@ -11,3 +11,5 @@ public sealed class Categoria : Entidad
 
     public string Nombre { get; private set; } = string.Empty;
 }
+
+

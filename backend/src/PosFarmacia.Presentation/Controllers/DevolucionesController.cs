@@ -20,3 +20,5 @@ public sealed class DevolucionesController(
     public async Task<ActionResult<IReadOnlyList<DevolucionResponse>>> Listar([FromQuery] Guid ventaId, CancellationToken ct) =>
         Ok(await consultarDevoluciones.EjecutarAsync(ventaId, ct));
 }
+
+

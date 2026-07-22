@@ -25,3 +25,5 @@ public sealed class ValidacionReceta : Entidad
 
     public string? Observaciones { get; private set; }
 }
+
+

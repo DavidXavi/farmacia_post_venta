@@ -37,3 +37,5 @@ public sealed class DomainExceptionHandler(ILogger<DomainExceptionHandler> logge
         return true;
     }
 }
+
+

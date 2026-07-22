@@ -47,3 +47,5 @@ public sealed class Usuario : Entidad
 
     public bool EstaActivo => Estado == EstadoCuenta.Activo;
 }
+
+

@@ -29,3 +29,5 @@ public sealed class AfiliacionCliente : Entidad
 
     public void Reactivar() => Estado = EstadoAfiliacion.Activa;
 }
+
+

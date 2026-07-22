@@ -37,3 +37,5 @@ public sealed class ConvenioSeguro : Entidad
 
     public void Desactivar() => Activo = false;
 }
+
+

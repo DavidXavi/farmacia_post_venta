@@ -22,3 +22,5 @@ public sealed class AplicacionPromocion : Entidad
 
     public Dinero MontoDescuento { get; private set; } = Dinero.Cero;
 }
+
+

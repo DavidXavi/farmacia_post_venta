@@ -16,3 +16,5 @@ public sealed class Rol : Entidad
 
     public string Descripcion { get; private set; } = string.Empty;
 }
+
+
