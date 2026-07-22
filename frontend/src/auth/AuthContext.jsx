@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { api, setAuthToken } from '../api/client'
+import { api, setAuthToken, setUnauthorizedHandler } from '../api/client'
 
 const AuthContext = createContext(null)
 
@@ -28,6 +28,10 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('posfarmacia.session')
     setSession(null)
   }
+
+  useEffect(() => {
+    setUnauthorizedHandler(logout)
+  }, [])
 
   function tieneRol(...roles) {
     return session ? roles.some((r) => session.roles.includes(r)) : false

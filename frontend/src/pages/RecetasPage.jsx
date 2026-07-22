@@ -1,8 +1,16 @@
 import { useState } from 'react'
 import { api } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
+import { AyudaFormulario } from '../components/AyudaFormulario'
 
 const TIPOS_RECETA = ['Normal', 'Especial', 'EspecialRetenida']
+
+const AYUDA_RECETAS = [
+  'El número de receta debe ser único.',
+  'Las recetas de tipo Especial o EspecialRetenida requieren fecha de vencimiento propia.',
+  'Una receta EspecialRetenida solo puede usarse una vez: tras dispensarse queda retenida y no puede reutilizarse.',
+  "La receta debe ser Aprobada por un químico farmacéutico (sección 'Validar receta') antes de poder usarse en una venta.",
+]
 
 export function RecetasPage() {
   const { session } = useAuth()
@@ -58,7 +66,10 @@ export function RecetasPage() {
 
   return (
     <section>
-      <h1>Recetas</h1>
+      <h1>
+        Recetas
+        <AyudaFormulario titulo="Cómo registrar y validar una receta" pasos={AYUDA_RECETAS} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrar}>
         <h3>Registrar receta</h3>

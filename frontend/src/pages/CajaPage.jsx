@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_CAJA = [
+  'Selecciona la caja para ver si ya tiene una sesión abierta.',
+  'Si no hay sesión abierta, ingresa el monto inicial de efectivo y abre la caja: no se puede vender sin una caja abierta.',
+  'Al cerrar, ingresa el monto contado en efectivo; el sistema calcula la diferencia contra lo esperado según las ventas confirmadas del turno.',
+]
 
 export function CajaPage() {
   const { session } = useAuth()
@@ -56,7 +63,10 @@ export function CajaPage() {
 
   return (
     <section>
-      <h1>Apertura y cierre de caja</h1>
+      <h1>
+        Apertura y cierre de caja
+        <AyudaFormulario titulo="Cómo abrir y cerrar caja" pasos={AYUDA_CAJA} />
+      </h1>
 
       <label>
         Caja

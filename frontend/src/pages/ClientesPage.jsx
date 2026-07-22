@@ -1,5 +1,12 @@
 import { useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_CLIENTES = [
+  'El DNI debe tener exactamente 8 dígitos y es único por cliente.',
+  "Usa 'Buscar por DNI' antes de registrar, para evitar duplicar un cliente ya existente.",
+  'Teléfono y correo son opcionales.',
+]
 
 export function ClientesPage() {
   const [dni, setDni] = useState('')
@@ -40,7 +47,10 @@ export function ClientesPage() {
 
   return (
     <section>
-      <h1>Clientes</h1>
+      <h1>
+        Clientes
+        <AyudaFormulario titulo="Cómo registrar un cliente" pasos={AYUDA_CLIENTES} />
+      </h1>
 
       <div className="tarjeta">
         <h3>Buscar por DNI</h3>

@@ -3,4 +3,5 @@
 .vscode/
 .idea/
 *.DotSettings.user
-.gstack/
+.gstack
+/docs

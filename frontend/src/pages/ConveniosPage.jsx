@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_CONVENIOS = [
+  'Primero registra el convenio (nombre del seguro/EPS).',
+  'Luego configura la cobertura: qué porcentaje cubre el convenio para cada producto específico.',
+  'Por último, afilia al cliente (buscado por DNI) al convenio, con una vigencia opcional.',
+  'El copago se calcula automáticamente en la venta solo si la afiliación del cliente está activa y vigente en la fecha de la venta.',
+]
 
 export function ConveniosPage() {
   const [convenios, setConvenios] = useState([])
@@ -64,7 +72,10 @@ export function ConveniosPage() {
 
   return (
     <section>
-      <h1>Convenios de seguro</h1>
+      <h1>
+        Convenios de seguro
+        <AyudaFormulario titulo="Cómo registrar un convenio" pasos={AYUDA_CONVENIOS} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrarConvenio}>
         <h3>Nuevo convenio</h3>

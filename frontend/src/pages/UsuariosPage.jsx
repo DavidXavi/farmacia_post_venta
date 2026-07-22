@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_USUARIOS = [
+  'El nombre de usuario y la contraseña son obligatorios para el inicio de sesión.',
+  'Selecciona el local donde trabajará el usuario.',
+  'Marca uno o más roles: los roles determinan qué acciones y pantallas puede usar (por ejemplo, solo un Administrador puede ver Auditoría).',
+]
 
 export function UsuariosPage() {
   const [usuarios, setUsuarios] = useState([])
@@ -46,7 +53,10 @@ export function UsuariosPage() {
 
   return (
     <section>
-      <h1>Usuarios</h1>
+      <h1>
+        Usuarios
+        <AyudaFormulario titulo="Cómo registrar un usuario" pasos={AYUDA_USUARIOS} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrar}>
         <h3>Nuevo usuario</h3>

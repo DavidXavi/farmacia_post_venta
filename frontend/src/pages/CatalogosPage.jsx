@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_CATALOGOS = [
+  'Categorías, Laboratorios, Presentaciones, Formas de pago y Locales son catálogos simples: solo piden un nombre (y en Presentaciones/Formas de pago un dato adicional).',
+  'Estos catálogos alimentan los selectores de Productos, Lotes y Usuarios — créalos aquí antes de usarlos en esos formularios.',
+  'Las Reglas de incentivo asocian una comisión por unidad vendida a un producto o a una categoría (no ambos a la vez), dentro de un rango de fechas de vigencia.',
+]
 
 const TIPOS_FORMA_PAGO = ['Efectivo', 'TarjetaDebito', 'TarjetaCredito', 'Transferencia', 'BilleteraDigital', 'CopagoSeguro', 'CreditoFarmacia', 'Otro']
 
@@ -81,7 +88,10 @@ export function CatalogosPage() {
 
   return (
     <section>
-      <h1>Catalogos</h1>
+      <h1>
+        Catalogos
+        <AyudaFormulario titulo="Cómo usar los catálogos" pasos={AYUDA_CATALOGOS} />
+      </h1>
 
       <SeccionSimple
         titulo="Categorias"

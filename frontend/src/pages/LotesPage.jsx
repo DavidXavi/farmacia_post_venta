@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_LOTES = [
+  'El código de lote debe ser único por producto.',
+  'La fecha de vencimiento determina el orden FEFO: se despachan primero los lotes que vencen antes.',
+  'Un lote no se puede vender dentro de los 3 meses previos a su vencimiento (período preventivo) ni después de vencido.',
+  "Usa 'Bloquear' para inmovilizar temporalmente un lote y 'Retirar' para darlo de baja definitivamente.",
+]
 
 export function LotesPage() {
   const [lotes, setLotes] = useState([])
@@ -56,7 +64,10 @@ export function LotesPage() {
 
   return (
     <section>
-      <h1>Lotes</h1>
+      <h1>
+        Lotes
+        <AyudaFormulario titulo="Cómo registrar un lote" pasos={AYUDA_LOTES} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrarLote}>
         <h3>Nuevo lote</h3>

@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { api } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_DEVOLUCIONES = [
+  'Busca la venta original por su Id (visible en la pantalla de Venta o Reportes) para ver sus líneas.',
+  'Solo se pueden devolver ventas Confirmadas, dentro de los 30 días de la venta, y productos no controlados.',
+  'La cantidad a devolver no puede superar lo vendido menos lo ya devuelto en devoluciones previas de esa misma venta.',
+  'El stock devuelto se reintegra a los mismos lotes que surtieron la venta originalmente.',
+]
 
 export function DevolucionesPage() {
   const { session } = useAuth()
@@ -58,7 +66,10 @@ export function DevolucionesPage() {
 
   return (
     <section>
-      <h1>Devoluciones</h1>
+      <h1>
+        Devoluciones
+        <AyudaFormulario titulo="Cómo registrar una devolución" pasos={AYUDA_DEVOLUCIONES} />
+      </h1>
 
       <div className="tarjeta">
         <h3>Buscar venta</h3>

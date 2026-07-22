@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_VENTA = [
+  'Selecciona la caja con turno abierto e ingresa el DNI del cliente (opcional) antes de iniciar la venta.',
+  'Agrega productos uno por uno con la cantidad. Si el producto es controlado, indica el Id de una receta ya aprobada.',
+  "Usa 'Ver promociones' en cada línea para aplicar automáticamente la primera promoción vigente de ese producto.",
+  'Si el cliente tiene un convenio de seguro, identifícalo por DNI y aplica el convenio para calcular el copago.',
+  'Registra uno o más pagos hasta cubrir el total de la venta.',
+  'Elige el tipo de comprobante y la serie, y confirma la venta: esto descuenta stock por FEFO y genera el comprobante.',
+]
 
 export function VentaPage() {
   const { session } = useAuth()
@@ -140,7 +150,10 @@ export function VentaPage() {
   if (!venta) {
     return (
       <section>
-        <h1>Punto de venta</h1>
+        <h1>
+          Punto de venta
+          <AyudaFormulario titulo="Cómo registrar una venta" pasos={AYUDA_VENTA} />
+        </h1>
         <div className="tarjeta">
           <label>
             Caja
@@ -164,7 +177,10 @@ export function VentaPage() {
 
   return (
     <section>
-      <h1>Venta en curso {venta.numeroComprobante ? `— ${venta.numeroComprobante}` : ''}</h1>
+      <h1>
+        Venta en curso {venta.numeroComprobante ? `— ${venta.numeroComprobante}` : ''}
+        <AyudaFormulario titulo="Cómo registrar una venta" pasos={AYUDA_VENTA} />
+      </h1>
       <p>Estado: <strong>{venta.estado}</strong> — Cliente: {venta.clienteId || 'sin identificar'}</p>
       {mensaje && <p className="aviso">{mensaje}</p>}
 

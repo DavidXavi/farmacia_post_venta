@@ -27,7 +27,9 @@ export function LoginPage() {
   return (
     <div className="pantalla-centrada">
       <form className="tarjeta" onSubmit={onSubmit}>
-        <h1>Sistema POS Farmacia</h1>
+        <h1>
+          <i className="fa-solid fa-mortar-pestle" /> Sistema POS Farmacia
+        </h1>
         <label>
           Usuario
           <input value={nombreUsuario} onChange={(e) => setNombreUsuario(e.target.value)} required />
@@ -38,6 +40,7 @@ export function LoginPage() {
         </label>
         {error && <p className="error">{error}</p>}
         <button type="submit" disabled={cargando}>
+          <i className={`fa-solid ${cargando ? 'fa-spinner fa-spin' : 'fa-right-to-bracket'}`} />{' '}
           {cargando ? 'Ingresando...' : 'Ingresar'}
         </button>
       </form>

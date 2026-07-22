@@ -1,5 +1,11 @@
 import { useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_REPORTES = [
+  "En 'Ventas diarias', elige una fecha y consulta para ver el resumen de ventas de ese día (si no eliges fecha, se usa el día de hoy).",
+  "En 'Lotes próximos a vencer', el reporte revisa un horizonte fijo de 90 días hacia adelante desde hoy.",
+]
 
 export function ReportesPage() {
   const [fecha, setFecha] = useState('')
@@ -27,7 +33,10 @@ export function ReportesPage() {
 
   return (
     <section>
-      <h1>Reportes</h1>
+      <h1>
+        Reportes
+        <AyudaFormulario titulo="Cómo usar los reportes" pasos={AYUDA_REPORTES} />
+      </h1>
       {mensaje && <p className="aviso">{mensaje}</p>}
 
       <div className="tarjeta">

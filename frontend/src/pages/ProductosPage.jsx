@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
 
 const TIPOS_PRODUCTO = ['Medicamento', 'Otc', 'Otro']
+
+const AYUDA_PRODUCTOS = [
+  'Código interno y nombre comercial son obligatorios y deben ser únicos.',
+  'Selecciona categoría, laboratorio y presentación ya existentes — créalos primero en Catálogos si faltan en la lista.',
+  "Marca 'Producto controlado' solo para medicamentos que exigen receta médica; si lo marcas, activa también 'Requiere receta'.",
+  'El precio de venta no incluye IGV: el sistema lo calcula automáticamente al momento de la venta.',
+]
 
 export function ProductosPage() {
   const [productos, setProductos] = useState([])
@@ -57,7 +65,10 @@ export function ProductosPage() {
 
   return (
     <section>
-      <h1>Productos</h1>
+      <h1>
+        Productos
+        <AyudaFormulario titulo="Cómo registrar un producto" pasos={AYUDA_PRODUCTOS} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrarProducto}>
         <h3>Nuevo producto</h3>

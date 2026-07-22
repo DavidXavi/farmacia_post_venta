@@ -1,5 +1,12 @@
 import { useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_CREDITOS = [
+  'Busca primero al cliente por DNI: si no existe, regístralo en el módulo Clientes.',
+  "Si el cliente no tiene línea de crédito, verás 'Sin línea de crédito registrada' — puedes registrar una nueva abajo.",
+  'El monto autorizado es el límite de crédito; el saldo disponible disminuye con cada consumo a crédito en una venta.',
+]
 
 export function CreditosPage() {
   const [dni, setDni] = useState('')
@@ -46,7 +53,10 @@ export function CreditosPage() {
 
   return (
     <section>
-      <h1>Lineas de credito</h1>
+      <h1>
+        Lineas de credito
+        <AyudaFormulario titulo="Cómo registrar una línea de crédito" pasos={AYUDA_CREDITOS} />
+      </h1>
 
       <div className="tarjeta">
         <h3>Buscar cliente por DNI</h3>

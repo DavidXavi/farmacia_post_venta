@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { AyudaFormulario } from '../components/AyudaFormulario'
+
+const AYUDA_INVENTARIO = [
+  'Selecciona un local para ver el stock consolidado por producto en ese local.',
+  'Esta pantalla es solo de consulta: el stock se recalcula automáticamente desde los lotes, nunca se edita aquí directamente.',
+]
 
 export function InventarioPage() {
   const [locales, setLocales] = useState([])
@@ -28,7 +34,10 @@ export function InventarioPage() {
 
   return (
     <section>
-      <h1>Inventario</h1>
+      <h1>
+        Inventario
+        <AyudaFormulario titulo="Cómo consultar el inventario" pasos={AYUDA_INVENTARIO} />
+      </h1>
 
       <div className="tarjeta">
         <label>

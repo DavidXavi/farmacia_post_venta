@@ -1,9 +1,14 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8088'
 
 let currentToken = null
+let onUnauthorized = null
 
 export function setAuthToken(token) {
   currentToken = token
+}
+
+export function setUnauthorizedHandler(handler) {
+  onUnauthorized = handler
 }
 
 async function request(path, { method = 'GET', body, query } = {}) {
@@ -29,6 +34,7 @@ async function request(path, { method = 'GET', body, query } = {}) {
   const data = text ? JSON.parse(text) : null
 
   if (!response.ok) {
+    if (response.status === 401 && onUnauthorized) onUnauthorized()
     const message = data?.title || data?.message || `Error ${response.status}`
     throw new Error(message)
   }

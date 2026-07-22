@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
+import { AyudaFormulario } from '../components/AyudaFormulario'
 
 const TIPOS_BENEFICIO = ['DescuentoPorcentaje', 'DescuentoMonto', 'LlevaNPagaM']
+
+const AYUDA_PROMOCIONES = [
+  "Elige el tipo de beneficio: Descuento por porcentaje, Descuento por monto fijo, o 'Lleva N Paga M' (unidades gratis según cantidad).",
+  'La cantidad mínima define desde cuántas unidades de un producto participante se activa la promoción.',
+  "Marca 'Requiere cliente identificado' solo si la promoción exige tener un cliente asociado a la venta.",
+  'Selecciona los productos participantes: la promoción no se aplica a productos fuera de esta lista.',
+  'Una venta nunca aplica la misma promoción dos veces, ni más de una promoción por línea.',
+]
 
 export function PromocionesPage() {
   const { session } = useAuth()
@@ -72,7 +81,10 @@ export function PromocionesPage() {
 
   return (
     <section>
-      <h1>Promociones</h1>
+      <h1>
+        Promociones
+        <AyudaFormulario titulo="Cómo registrar una promoción" pasos={AYUDA_PROMOCIONES} />
+      </h1>
 
       <form className="tarjeta" onSubmit={registrar}>
         <h3>Nueva promocion</h3>
