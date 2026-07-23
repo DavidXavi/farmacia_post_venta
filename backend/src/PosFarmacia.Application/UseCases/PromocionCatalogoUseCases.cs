@@ -34,6 +34,29 @@ public sealed class RegistrarPromocionUseCase(IPromocionRepository promociones, 
     }
 }
 
+public sealed class EditarPromocionUseCase(IPromocionRepository promociones, IUnitOfWork unitOfWork)
+{
+    public async Task<PromocionResponse> EjecutarAsync(Guid promocionId, EditarPromocionRequest request, CancellationToken ct = default)
+    {
+        var promocion = await promociones.ObtenerPorIdAsync(promocionId, ct)
+            ?? throw new EntidadNoEncontradaException("La promocion indicada no existe.");
+
+        promocion.EditarDatos(
+            request.Nombre,
+            request.Descripcion,
+            Enum.Parse<TipoBeneficioPromocion>(request.TipoBeneficio),
+            request.ValorBeneficio,
+            request.RequiereCliente,
+            new Cantidad(request.CantidadMinima),
+            request.FechaInicio,
+            request.FechaFin,
+            request.ProductosParticipantes);
+
+        await unitOfWork.GuardarCambiosAsync(ct);
+        return promocion.ToResponse();
+    }
+}
+
 public sealed class ConsultarPromocionesUseCase(IPromocionRepository promociones)
 {
     public async Task<IReadOnlyList<PromocionResponse>> EjecutarAsync(CancellationToken ct = default)

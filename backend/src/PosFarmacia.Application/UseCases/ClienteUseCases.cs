@@ -34,3 +34,25 @@ public sealed class BuscarClientePorDniUseCase(IClienteRepository clientes)
         return cliente?.ToResponse();
     }
 }
+
+public sealed class ConsultarClientesUseCase(IClienteRepository clientes)
+{
+    public async Task<IReadOnlyList<ClienteResponse>> EjecutarAsync(CancellationToken ct = default)
+    {
+        var resultado = await clientes.ObtenerTodosAsync(ct);
+        return resultado.Select(c => c.ToResponse()).ToList();
+    }
+}
+
+public sealed class ActualizarClienteUseCase(IClienteRepository clientes, IUnitOfWork unitOfWork)
+{
+    public async Task<ClienteResponse> EjecutarAsync(Guid clienteId, ActualizarClienteRequest request, CancellationToken ct = default)
+    {
+        var cliente = await clientes.ObtenerPorIdAsync(clienteId, ct)
+            ?? throw new EntidadNoEncontradaException("El cliente indicado no existe.");
+
+        cliente.ActualizarDatos(request.Telefono, request.Correo, request.Direccion);
+        await unitOfWork.GuardarCambiosAsync(ct);
+        return cliente.ToResponse();
+    }
+}

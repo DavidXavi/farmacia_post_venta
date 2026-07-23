@@ -10,6 +10,7 @@ namespace PosFarmacia.Presentation.Controllers;
 [Authorize]
 public sealed class PromocionesController(
     RegistrarPromocionUseCase registrarPromocion,
+    EditarPromocionUseCase editarPromocion,
     ConsultarPromocionesUseCase consultarPromociones,
     DesactivarPromocionUseCase desactivarPromocion) : ControllerBase
 {
@@ -17,6 +18,11 @@ public sealed class PromocionesController(
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<PromocionResponse>> Registrar(RegistrarPromocionRequest request, CancellationToken ct) =>
         Ok(await registrarPromocion.EjecutarAsync(request, ct));
+
+    [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Administrador")]
+    public async Task<ActionResult<PromocionResponse>> Editar(Guid id, EditarPromocionRequest request, CancellationToken ct) =>
+        Ok(await editarPromocion.EjecutarAsync(id, request, ct));
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<PromocionResponse>>> Listar(CancellationToken ct) =>

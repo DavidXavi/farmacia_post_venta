@@ -57,6 +57,32 @@ public sealed class Promocion : Entidad
         _productos.Add(new PromocionProducto(Id, productoId));
     }
 
+    public void EditarDatos(
+        string nombre,
+        string descripcion,
+        TipoBeneficioPromocion tipoBeneficio,
+        decimal valorBeneficio,
+        bool requiereCliente,
+        Cantidad cantidadMinima,
+        DateOnly? fechaInicio,
+        DateOnly? fechaFin,
+        IReadOnlyCollection<Guid> productosParticipantes)
+    {
+        Nombre = nombre;
+        Descripcion = descripcion;
+        TipoBeneficio = tipoBeneficio;
+        ValorBeneficio = valorBeneficio;
+        RequiereCliente = requiereCliente;
+        CantidadMinima = cantidadMinima;
+        Vigencia = new PeriodoVigencia(fechaInicio, fechaFin);
+
+        _productos.RemoveAll(p => !productosParticipantes.Contains(p.ProductoId));
+        foreach (var productoId in productosParticipantes)
+        {
+            AgregarProductoParticipante(productoId);
+        }
+    }
+
     public bool AplicaAProducto(Guid productoId) => _productos.Any(p => p.ProductoId == productoId);
 
     public bool EstaVigente(DateOnly hoy) => Activa && Vigencia.EstaVigente(hoy);

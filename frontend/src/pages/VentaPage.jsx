@@ -10,6 +10,7 @@ const AYUDA_VENTA = [
   'Si el cliente tiene un convenio de seguro, identifícalo por DNI y aplica el convenio para calcular el copago.',
   'Registra uno o más pagos hasta cubrir el total de la venta.',
   'Elige el tipo de comprobante y la serie, y confirma la venta: esto descuenta stock por FEFO y genera el comprobante.',
+  'El precio del producto no incluye IGV. Cada línea calcula: Base = (Precio × Cantidad) − Descuento, IGV = 18% de la Base, y Total línea = Base + IGV. El "Total" de la venta es la suma de los totales de línea (ya con IGV incluido).',
 ]
 
 export function VentaPage() {
@@ -186,8 +187,9 @@ export function VentaPage() {
 
       <div className="tarjeta">
         <h3>Lineas de venta</h3>
+        <p className="ayuda-campo">El precio no incluye IGV. Total línea = (Precio × Cant. − Descuento) + IGV (18%).</p>
         <table>
-          <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Descuento</th><th>Subtotal</th><th></th></tr></thead>
+          <thead><tr><th>Producto</th><th>Cant.</th><th>Precio (sin IGV)</th><th>Descuento</th><th>IGV</th><th>Total línea</th><th></th></tr></thead>
           <tbody>
             {venta.detalles.map((d) => (
               <tr key={d.id}>
@@ -195,13 +197,18 @@ export function VentaPage() {
                 <td>{d.cantidad}</td>
                 <td>S/ {d.precioUnitario}</td>
                 <td>S/ {d.descuentoMonto}</td>
+                <td>S/ {d.impuestoMonto}</td>
                 <td>S/ {d.subtotal}</td>
                 <td>{!ventaConfirmada && <button onClick={() => verPromociones(d.id)}>Ver promociones</button>}</td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p>Total: <strong>S/ {venta.total}</strong> — Pagado: S/ {venta.totalPagado}</p>
+        <p>
+          Total sin IGV: S/ {(venta.total - venta.detalles.reduce((s, d) => s + d.impuestoMonto, 0)).toFixed(2)}
+          {' '}— IGV (18%): S/ {venta.detalles.reduce((s, d) => s + d.impuestoMonto, 0).toFixed(2)}
+          {' '}— <strong>Total a pagar: S/ {venta.total}</strong> — Pagado: S/ {venta.totalPagado}
+        </p>
       </div>
 
       {!ventaConfirmada && (

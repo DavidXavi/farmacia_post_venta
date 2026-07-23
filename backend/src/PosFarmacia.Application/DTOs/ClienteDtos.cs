@@ -9,6 +9,8 @@ public sealed record RegistrarClienteRequest(
     string? Correo,
     string? Direccion);
 
+public sealed record ActualizarClienteRequest(string? Telefono, string? Correo, string? Direccion);
+
 public sealed record ClienteResponse(
     Guid Id,
     string Dni,

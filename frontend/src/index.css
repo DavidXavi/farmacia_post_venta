@@ -333,6 +333,12 @@ tbody tr:hover {
   box-shadow: var(--shadow);
 }
 
+.ayuda-campo {
+  font-size: 0.85em;
+  color: var(--muted, #6b7280);
+  margin: -6px 0 8px;
+}
+
 .app-shell {
   display: flex;
   min-height: 100svh;

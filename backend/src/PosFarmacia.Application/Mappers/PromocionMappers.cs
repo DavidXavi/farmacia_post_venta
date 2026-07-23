@@ -15,7 +15,8 @@ public static class PromocionMappers
         p.CantidadMinima.Valor,
         p.Vigencia.Inicio,
         p.Vigencia.Fin,
-        p.Activa);
+        p.Activa,
+        p.Productos.Select(pp => pp.ProductoId).ToList());
 
     public static PromocionAplicableResponse ToAplicableResponse(this Promocion p) => new(
         p.Id, p.Nombre, p.TipoBeneficio.ToString(), p.ValorBeneficio, p.RequiereCliente);

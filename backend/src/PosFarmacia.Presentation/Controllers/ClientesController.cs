@@ -11,12 +11,22 @@ namespace PosFarmacia.Presentation.Controllers;
 public sealed class ClientesController(
     RegistrarClienteUseCase registrarCliente,
     BuscarClientePorDniUseCase buscarClientePorDni,
+    ConsultarClientesUseCase consultarClientes,
+    ActualizarClienteUseCase actualizarCliente,
     ConsultarConvenioDeClienteUseCase consultarConvenios,
     ConsultarLineaCreditoUseCase consultarLineaCredito) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<ClienteResponse>> Registrar(RegistrarClienteRequest request, CancellationToken ct) =>
         Ok(await registrarCliente.EjecutarAsync(request, ct));
+
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<ClienteResponse>>> Listar(CancellationToken ct) =>
+        Ok(await consultarClientes.EjecutarAsync(ct));
+
+    [HttpPatch("{id:guid}")]
+    public async Task<ActionResult<ClienteResponse>> Actualizar(Guid id, ActualizarClienteRequest request, CancellationToken ct) =>
+        Ok(await actualizarCliente.EjecutarAsync(id, request, ct));
 
     [HttpGet("dni/{dni}")]
     public async Task<ActionResult<ClienteResponse>> BuscarPorDni(string dni, CancellationToken ct)
